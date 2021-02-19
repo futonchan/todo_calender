@@ -1,3 +1,6 @@
 ・やること
-TodoList, Calendarボタンが表示されない
-カレンダー表示
+~~TodoList, Calendarボタンが表示されない~~
+~~カレンダー表示~~
+
+・覚書
+.xcworkspaceから起動
