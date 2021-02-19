@@ -49,6 +49,27 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
             // エラー処理なし
         }
     }
+    
+    // 削除可能なタスクを表示
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) ->  Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            todoList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
+            do {
+                let data: Data = try NSKeyedArchiver.archivedData(withRootObject: todoList, requiringSecureCoding: true)
+                let userDefault = UserDefaults.standard
+                userDefault.set(data, forKey: "todoList")
+                userDefault.synchronize()
+            }
+            catch{
+                // エラー処理なし
+            }
+        }
+    }
 
     var todoList = [MyTodo]()
 
