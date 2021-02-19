@@ -28,7 +28,10 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        let userDefaults = UserDefaults.standard
+        if let storedTodoList = userDefaults.array(forKey: "todoList") as? [String] {
+            todoList.append(contentsOf: storedTodoList)
+        }
     }
     
     
@@ -41,6 +44,10 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if let textField = alertController.textFields?.first {
                 self.todoList.insert(textField.text!, at: 0)
                 self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: UITableView.RowAnimation.right)
+                
+                let userDefaults = UserDefaults.standard
+                userDefaults.set(self.todoList, forKey: "todoList")
+                userDefaults.synchronize()
             }
         }
         alertController.addAction(okAction)
