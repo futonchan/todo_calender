@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,9 +13,12 @@
 		2B1C664325C7E26C00F153CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B1C664125C7E26C00F153CE /* Main.storyboard */; };
 		2B1C664525C7E28200F153CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B1C664425C7E28200F153CE /* Assets.xcassets */; };
 		2B1C664825C7E28300F153CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B1C664625C7E28300F153CE /* LaunchScreen.storyboard */; };
+		2B44CA8925DF9B9C008323E5 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B44CA8825DF9B9C008323E5 /* TodoViewController.swift */; };
+		8097F8A176F41B2972D1C3C1 /* Pods_todo_calendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0F46DCF510FF1EC090B0B39 /* Pods_todo_calendar.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13DACE1B58B3A397931839C8 /* Pods-todo_calendar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todo_calendar.release.xcconfig"; path = "Target Support Files/Pods-todo_calendar/Pods-todo_calendar.release.xcconfig"; sourceTree = "<group>"; };
 		2B1C663825C7E26C00F153CE /* todo_calendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = todo_calendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B1C663B25C7E26C00F153CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2B1C663D25C7E26C00F153CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +27,9 @@
 		2B1C664425C7E28200F153CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B1C664725C7E28300F153CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B1C664925C7E28300F153CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2B44CA8825DF9B9C008323E5 /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
+		F0F46DCF510FF1EC090B0B39 /* Pods_todo_calendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_todo_calendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F480D95E0D40EB0C3B07F8EE /* Pods-todo_calendar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todo_calendar.debug.xcconfig"; path = "Target Support Files/Pods-todo_calendar/Pods-todo_calendar.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8097F8A176F41B2972D1C3C1 /* Pods_todo_calendar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +49,8 @@
 			children = (
 				2B1C663A25C7E26C00F153CE /* todo_calendar */,
 				2B1C663925C7E26C00F153CE /* Products */,
+				D9C1A835A37C9426B9459FE0 /* Pods */,
+				38B14D8BAD328B4EEE46C59C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,11 +69,29 @@
 				2B1C663D25C7E26C00F153CE /* SceneDelegate.swift */,
 				2B1C663F25C7E26C00F153CE /* ViewController.swift */,
 				2B1C664125C7E26C00F153CE /* Main.storyboard */,
+				2B44CA8825DF9B9C008323E5 /* TodoViewController.swift */,
 				2B1C664425C7E28200F153CE /* Assets.xcassets */,
 				2B1C664625C7E28300F153CE /* LaunchScreen.storyboard */,
 				2B1C664925C7E28300F153CE /* Info.plist */,
 			);
 			path = todo_calendar;
+			sourceTree = "<group>";
+		};
+		38B14D8BAD328B4EEE46C59C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F0F46DCF510FF1EC090B0B39 /* Pods_todo_calendar.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D9C1A835A37C9426B9459FE0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F480D95E0D40EB0C3B07F8EE /* Pods-todo_calendar.debug.xcconfig */,
+				13DACE1B58B3A397931839C8 /* Pods-todo_calendar.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +101,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2B1C664C25C7E28300F153CE /* Build configuration list for PBXNativeTarget "todo_calendar" */;
 			buildPhases = (
+				290B6CC80A2CC6E6977B933C /* [CP] Check Pods Manifest.lock */,
 				2B1C663425C7E26C00F153CE /* Sources */,
 				2B1C663525C7E26C00F153CE /* Frameworks */,
 				2B1C663625C7E26C00F153CE /* Resources */,
+				A9B1FFC6D85B68D7A119417D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,11 +161,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		290B6CC80A2CC6E6977B933C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-todo_calendar-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A9B1FFC6D85B68D7A119417D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-todo_calendar/Pods-todo_calendar-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-todo_calendar/Pods-todo_calendar-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-todo_calendar/Pods-todo_calendar-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2B1C663425C7E26C00F153CE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B44CA8925DF9B9C008323E5 /* TodoViewController.swift in Sources */,
 				2B1C664025C7E26C00F153CE /* ViewController.swift in Sources */,
 				2B1C663C25C7E26C00F153CE /* AppDelegate.swift in Sources */,
 				2B1C663E25C7E26C00F153CE /* SceneDelegate.swift in Sources */,
@@ -283,6 +355,7 @@
 		};
 		2B1C664D25C7E28300F153CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F480D95E0D40EB0C3B07F8EE /* Pods-todo_calendar.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -302,6 +375,7 @@
 		};
 		2B1C664E25C7E28300F153CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 13DACE1B58B3A397931839C8 /* Pods-todo_calendar.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
