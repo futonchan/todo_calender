@@ -13,6 +13,7 @@
 		2B1C664525C7E28200F153CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B1C664425C7E28200F153CE /* Assets.xcassets */; };
 		2B1C664825C7E28300F153CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B1C664625C7E28300F153CE /* LaunchScreen.storyboard */; };
 		2B44CA8925DF9B9C008323E5 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B44CA8825DF9B9C008323E5 /* TodoViewController.swift */; };
+		2B44CA8D25DFB554008323E5 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B44CA8C25DFB554008323E5 /* CalendarViewController.swift */; };
 		8097F8A176F41B2972D1C3C1 /* Pods_todo_calendar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0F46DCF510FF1EC090B0B39 /* Pods_todo_calendar.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		2B1C664725C7E28300F153CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2B1C664925C7E28300F153CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B44CA8825DF9B9C008323E5 /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
+		2B44CA8C25DFB554008323E5 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		F0F46DCF510FF1EC090B0B39 /* Pods_todo_calendar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_todo_calendar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F480D95E0D40EB0C3B07F8EE /* Pods-todo_calendar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todo_calendar.debug.xcconfig"; path = "Target Support Files/Pods-todo_calendar/Pods-todo_calendar.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,6 +65,7 @@
 		2B1C663A25C7E26C00F153CE /* todo_calendar */ = {
 			isa = PBXGroup;
 			children = (
+				2B44CA8C25DFB554008323E5 /* CalendarViewController.swift */,
 				2B1C663B25C7E26C00F153CE /* AppDelegate.swift */,
 				2B1C663D25C7E26C00F153CE /* SceneDelegate.swift */,
 				2B1C664125C7E26C00F153CE /* Main.storyboard */,
@@ -205,6 +208,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B44CA8D25DFB554008323E5 /* CalendarViewController.swift in Sources */,
 				2B44CA8925DF9B9C008323E5 /* TodoViewController.swift in Sources */,
 				2B1C663C25C7E26C00F153CE /* AppDelegate.swift in Sources */,
 				2B1C663E25C7E26C00F153CE /* SceneDelegate.swift in Sources */,
