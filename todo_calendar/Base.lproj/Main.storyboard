@@ -175,6 +175,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="ho7-Rf-mMZ" id="UJq-bD-ADI"/>
+                                    <outlet property="delegate" destination="ho7-Rf-mMZ" id="evt-iT-kmO"/>
+                                </connections>
                             </tableView>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a6q-Fr-3cn">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -189,6 +193,9 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="39"/>
                                         <state key="normal" title="+"/>
+                                        <connections>
+                                            <action selector="tapAddButton:" destination="ho7-Rf-mMZ" eventType="touchUpInside" id="rU2-dc-58g"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -198,6 +205,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="HTk-k8-uUg"/>
+                    <connections>
+                        <outlet property="tableView" destination="8Mq-xE-ii3" id="KZb-dh-o2z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v7z-Fi-vjj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
