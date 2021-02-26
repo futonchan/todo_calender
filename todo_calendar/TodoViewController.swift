@@ -30,13 +30,44 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // タスクをタップ時にチェックマークつける
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        let myTodo = todoList[indexPath.row]
-        if myTodo.todoDone{
-            myTodo.todoDone = false
+//        let myTodo = todoList[indexPath.row]
+//        if myTodo.todoDone{
+//            myTodo.todoDone = false
+//        }
+//        else {
+//            myTodo.todoDone = true
+//        }
+//
+        
+        let alertController = UIAlertController(title: "タスク編集", message: "タスクを編集してください¥n現在のタスク: " + todoList[indexPath.row].todoTitle! , preferredStyle: UIAlertController.Style.alert)
+        
+        alertController.addTextField(configurationHandler: nil)
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default){ (action: UIAlertAction) in
+            if let textField = alertController.textFields?.first {
+                let myTodo = MyTodo()
+                myTodo.todoTitle = textField.text!
+                self.todoList[indexPath.row] = myTodo
+                self.tableView.reloadData()
+                
+                let userDefaults = UserDefaults.standard
+                
+                do {
+                    let data = try NSKeyedArchiver.archivedData(withRootObject: self.todoList, requiringSecureCoding: true)
+                    userDefaults.set(data, forKey: "todoList")
+                    userDefaults.synchronize()
+                }
+                catch {
+                    // エラー処理なし
+                }
+            }
         }
-        else {
-            myTodo.todoDone = true
-        }
+        alertController.addAction(okAction)
+        
+        let cancelButton = UIAlertAction(title: "CANCEL", style: UIAlertAction.Style.cancel, handler: nil)
+        alertController.addAction(cancelButton)
+        present(alertController, animated: true, completion: nil)
+        
         
         tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.fade)
         do {
@@ -142,11 +173,15 @@ class MyTodo: NSObject, NSSecureCoding {
     
     var todoTitle: String?
     var todoDone: Bool = false
+    var todoDate : Date?
+    
+    
     override init(){
     }
     
     required init?(coder aDecoder: NSCoder) {
         todoTitle = aDecoder.decodeObject(forKey: "todoTitle") as? String
+        todoDone = aDecoder.decodeBool(forKey: "todoDone")
         todoDone = aDecoder.decodeBool(forKey: "todoDone")
     }
     
