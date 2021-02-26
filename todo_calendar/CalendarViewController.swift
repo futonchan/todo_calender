@@ -7,23 +7,40 @@
 
 import UIKit
 
-class CalendarViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+class CalendarViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return todoList.count
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath)
+        let myTodo = todoList[indexPath.row]
+        cell.textLabel?.text = myTodo.todoTitle
+        if myTodo.todoDone {
+            cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+        }
+        else{
+            cell.accessoryType = UITableViewCell.AccessoryType.none
+        }
+        return cell
     }
-    */
+    
+    var todoList = [MyTodo]()
 
+    @IBOutlet weak var calendar_tableView: UITableView!
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let userDefaults = UserDefaults.standard
+        if let storedTodoList = userDefaults.object(forKey: "todoList") as? Data{
+            do {
+                if let unarchiveTodoList = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, MyTodo.self], from: storedTodoList) as? [MyTodo] {
+                    todoList.append(contentsOf: unarchiveTodoList)
+                }
+            }
+            catch{
+                // エラー処理なし
+            }
+        }
+    }
 }

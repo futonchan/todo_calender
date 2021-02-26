@@ -45,6 +45,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="GmC-yU-Xm1" id="RAi-MX-tsU"/>
+                                    <outlet property="delegate" destination="GmC-yU-Xm1" id="CJZ-wt-RAk"/>
+                                </connections>
                             </tableView>
                             <view contentMode="scaleToFill" id="rU5-We-lgx" customClass="FSCalendar">
                                 <rect key="frame" x="0.0" y="89" width="375" height="325"/>
@@ -61,6 +65,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Calendar" image="calendar" catalog="system" id="Ekj-EL-u5S"/>
+                    <connections>
+                        <outlet property="calendar_tableView" destination="F73-bD-gBh" id="Ad1-rE-2we"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4S-b4-g5Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

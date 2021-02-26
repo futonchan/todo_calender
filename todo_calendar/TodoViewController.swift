@@ -28,7 +28,7 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return cell
     }
     
-    // タスクをタップ時にチェックマークつける
+    // タスクをタップ時
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
 //        let myTodo = todoList[indexPath.row]
 //        if myTodo.todoDone{
@@ -37,16 +37,45 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 //        else {
 //            myTodo.todoDone = true
 //        }
-//
+//todoList[indexPath.row].todoTitle!
         
-        let alertController = UIAlertController(title: "タスク編集", message: "タスクを編集してください¥n現在のタスク: " + todoList[indexPath.row].todoTitle! , preferredStyle: UIAlertController.Style.alert)
+        let alertController = UIAlertController(title: "タスク編集", message: "タスクを編集できます.                                          　--" , preferredStyle: UIAlertController.Style.alert)
         
-        alertController.addTextField(configurationHandler: nil)
+        alertController.addTextField{ (textField) -> Void in
+            textField.text = self.todoList[indexPath.row].todoTitle!
+        }
+        // datepicker設置
+        let myDatePicker: UIDatePicker = UIDatePicker()
+        myDatePicker.frame = CGRect(x: 15, y: 60, width: 280, height: 30)
+        myDatePicker.preferredDatePickerStyle = .compact
+        myDatePicker.timeZone = NSTimeZone.local
+        myDatePicker.locale = Locale(identifier: "ja_JP")
+//        myDatePicker.datePickerMode = .date // 日付のみ
+        alertController.view.addSubview(myDatePicker)
+        
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .short
+        dateFormatter.locale = Locale(identifier: "ja_JP")
+        
+        let init_picker_dateformat = dateFormatter.string(from:myDatePicker.date)
+
+        
+//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+//        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+
         
         let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default){ (action: UIAlertAction) in
             if let textField = alertController.textFields?.first {
                 let myTodo = MyTodo()
                 myTodo.todoTitle = textField.text!
+                
+                if init_picker_dateformat != dateFormatter.string(from: myDatePicker.date){
+                    myTodo.todoDate = dateFormatter.string(from: myDatePicker.date)
+                }
+
+                
                 self.todoList[indexPath.row] = myTodo
                 self.tableView.reloadData()
                 
@@ -103,6 +132,7 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
     var todoList = [MyTodo]()
+    var datePicker: UIDatePicker = UIDatePicker()
 
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
@@ -173,7 +203,7 @@ class MyTodo: NSObject, NSSecureCoding {
     
     var todoTitle: String?
     var todoDone: Bool = false
-    var todoDate : Date?
+    var todoDate : String?
     
     
     override init(){
@@ -182,12 +212,13 @@ class MyTodo: NSObject, NSSecureCoding {
     required init?(coder aDecoder: NSCoder) {
         todoTitle = aDecoder.decodeObject(forKey: "todoTitle") as? String
         todoDone = aDecoder.decodeBool(forKey: "todoDone")
-        todoDone = aDecoder.decodeBool(forKey: "todoDone")
+        todoDone = aDecoder.decodeBool(forKey: "todoDate")
     }
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(todoTitle, forKey: "todoTitle")
         aCoder.encode(todoDone, forKey: "todoDone")
+        aCoder.encode(todoDone, forKey: "todoDate")
     }
     
 }
