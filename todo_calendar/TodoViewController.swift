@@ -41,7 +41,7 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let alertController = UIAlertController(title: "タスク編集", message: "タスクを編集できます.                                          　--" , preferredStyle: UIAlertController.Style.alert)
         
-        
+        // datapickerの時間の初期値が現在の時間になってしまうのを修正
         // datepicker設置
         let myDatePicker: UIDatePicker = UIDatePicker()
         myDatePicker.frame = CGRect(x: 15, y: 60, width: 280, height: 30)
@@ -61,12 +61,9 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // dataformat型は yyyy/mm/dd hh:mm
         let init_picker_dateformat = dateFormatter.string(from:myDatePicker.date)
 
-        
-//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-//        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
 
         alertController.addTextField{ (textField) -> Void in
-            textField.text = init_picker_dateformat
+            textField.text = self.todoList[indexPath.row].todoTitle!
         }
         let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default){ (action: UIAlertAction) in
             if let textField = alertController.textFields?.first {
@@ -74,11 +71,13 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 // タスク作成して値を入れる
                 let myTodo = MyTodo()
                 myTodo.todoTitle = textField.text!
-                myTodo.todoDate = nil
                 
                 // もしタスクの日付を設定した場合、todoDateに格納
                 if init_picker_dateformat != dateFormatter.string(from: myDatePicker.date){
                     myTodo.todoDate = dateFormatter.string(from: myDatePicker.date)
+                }
+                else{
+                    myTodo.todoDate = nil
                 }
 
                 

@@ -59,6 +59,10 @@
                                         <color key="value" name="AccentColor"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="dataSource" destination="GmC-yU-Xm1" id="kjF-OM-oKd"/>
+                                    <outlet property="delegate" destination="GmC-yU-Xm1" id="RE9-ig-8BH"/>
+                                </connections>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="iBW-yF-vxA"/>
@@ -66,6 +70,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Calendar" image="calendar" catalog="system" id="Ekj-EL-u5S"/>
                     <connections>
+                        <outlet property="calendar" destination="rU5-We-lgx" id="AfE-o4-0Zf"/>
                         <outlet property="calendar_tableView" destination="F73-bD-gBh" id="Ad1-rE-2we"/>
                     </connections>
                 </viewController>
