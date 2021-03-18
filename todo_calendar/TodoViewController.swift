@@ -41,9 +41,7 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let alertController = UIAlertController(title: "タスク編集", message: "タスクを編集できます.                                          　--" , preferredStyle: UIAlertController.Style.alert)
         
-        alertController.addTextField{ (textField) -> Void in
-            textField.text = self.todoList[indexPath.row].todoTitle!
-        }
+        
         // datepicker設置
         let myDatePicker: UIDatePicker = UIDatePicker()
         myDatePicker.frame = CGRect(x: 15, y: 60, width: 280, height: 30)
@@ -59,18 +57,26 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         dateFormatter.timeStyle = .short
         dateFormatter.locale = Locale(identifier: "ja_JP")
         
+        // 入力した日付をdateformat型に
+        // dataformat型は yyyy/mm/dd hh:mm
         let init_picker_dateformat = dateFormatter.string(from:myDatePicker.date)
 
         
 //        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
 //        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
 
-        
+        alertController.addTextField{ (textField) -> Void in
+            textField.text = init_picker_dateformat
+        }
         let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default){ (action: UIAlertAction) in
             if let textField = alertController.textFields?.first {
+                
+                // タスク作成して値を入れる
                 let myTodo = MyTodo()
                 myTodo.todoTitle = textField.text!
+                myTodo.todoDate = nil
                 
+                // もしタスクの日付を設定した場合、todoDateに格納
                 if init_picker_dateformat != dateFormatter.string(from: myDatePicker.date){
                     myTodo.todoDate = dateFormatter.string(from: myDatePicker.date)
                 }
@@ -196,6 +202,7 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
 }
 
+// オブジェクトとstandard
 class MyTodo: NSObject, NSSecureCoding {
     static var supportsSecureCoding: Bool{
         return true
@@ -212,13 +219,13 @@ class MyTodo: NSObject, NSSecureCoding {
     required init?(coder aDecoder: NSCoder) {
         todoTitle = aDecoder.decodeObject(forKey: "todoTitle") as? String
         todoDone = aDecoder.decodeBool(forKey: "todoDone")
-        todoDone = aDecoder.decodeBool(forKey: "todoDate")
+        todoDate = aDecoder.decodeObject(forKey: "todoDate") as? String
     }
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(todoTitle, forKey: "todoTitle")
         aCoder.encode(todoDone, forKey: "todoDone")
-        aCoder.encode(todoDone, forKey: "todoDate")
+        aCoder.encode(todoDate, forKey: "todoDate")
     }
     
 }
