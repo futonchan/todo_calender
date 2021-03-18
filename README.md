@@ -22,15 +22,22 @@
 
 # わからないこと
 - CalendarViewのTableViewがどこからデータを撮ってきているのか
+予想：必須メソッドの「numberOfRowsInSection」と「cellForRowAt」。更新（self.tableview.reload, self.tableview.insertrowsも？）を行うことで、必須メソッドが実行されてtableViewにデータが反映される。
+
 - なんでコードのみで関係性が表示できないのか
 - tableView使う上で必須の関数2つの名前はtableViewと決まっているみたいだが、すでに変数でtableViewが使われていることには関係ないのか？（多分関係ない）
 - self.tableViewなどはどこから使い出して、どこで宣言されたのか？
+self.〜は、class内の変数を使えるもの。tableViewはドラッグして@IB Outlet?になってるから、いじりたいときself.がいる。
+シリアライズ関係では末尾に.selfついたりするのあり、別物
+
 - tableViewの必須メソッドいじっただけでtableView使ってない処理結果もが変わった
+最初のtableViewの予想があってたらこれもわかる
+
 - アプリの全体像、ビューとの関係性がわからない
 - Control + ドラッグでビューを関連づける意味は？何がしたくてやっている？
 - ↑の関連づけの際にDelegateもチェック入れるように言われるけどどこで使っているかがわからない
 - 構文が長い、メソッドが長い
-- nilがわからない
+- nilがわからない、エラー出たら適当に押して?とか!とかを入れてもらってる
 - 
 
 # 参考サイト
