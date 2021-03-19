@@ -29,6 +29,7 @@
 - class宣言時に、カレンダー使うさいには、カレンダーに関連したクラスを継承する必要がある
 - Date比較は、Stringで比較しないほうがいい
 - DateFormatterは何もしないと標準で、.locale決めてから、dataformatterがcallされてはじめて+09:00されて日本の時間になる
+- とりあえず初手Apple Developer Document読む
 
 # わからないこと
 - CalendarViewのTableViewがどこからデータを撮ってきているのか  
@@ -55,3 +56,4 @@ self.〜は、class内の変数を使えるもの。tableViewはドラッグし�
 # 参考サイト
 https://qiita.com/Koutya/items/f5c7c12ab1458b6addcd
 https://qiita.com/maiki055/items/b24378a3707bd35a31a8
+https://developer.apple.com/documentation/uikit/uidatepicker
