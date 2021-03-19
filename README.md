@@ -54,6 +54,6 @@ self.〜は、class内の変数を使えるもの。tableViewはドラッグし�
 - 
 
 # 参考サイト
-https://qiita.com/Koutya/items/f5c7c12ab1458b6addcd
-https://qiita.com/maiki055/items/b24378a3707bd35a31a8
-https://developer.apple.com/documentation/uikit/uidatepicker
+- https://qiita.com/Koutya/items/f5c7c12ab1458b6addcd
+- https://qiita.com/maiki055/items/b24378a3707bd35a31a8
+- https://developer.apple.com/documentation/uikit/uidatepicker
