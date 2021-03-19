@@ -18,12 +18,17 @@
 
 - [x] カレンダー初期設定時の日付のtodolistに、todolist画面でのタスクが読み込まれていない。これはカレンダー画面側でシリアライズされた情報を読み取っているため。解決策は、シリアライズのタイミングを画面遷移時に行うか、画面間でtodolist変数の受け渡しをするか。次はこれやったほうが良さそう
 
+# 構成
+- XCode
+- Swift
+- Storyboard
+- FSCalendar
+
 ## 覚書
 - .xcworkspaceから起動しないとカレンダー読み込まれない
 - class宣言時に、カレンダー使うさいには、カレンダーに関連したクラスを継承する必要がある
 - Date比較は、Stringで比較しないほうがいい
 - DateFormatterは何もしないと標準で、.locale決めてから、dataformatterがcallされてはじめて+09:00されて日本の時間になる
-
 
 # わからないこと
 - CalendarViewのTableViewがどこからデータを撮ってきているのか  
