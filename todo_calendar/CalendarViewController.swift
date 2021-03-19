@@ -10,12 +10,13 @@ import FSCalendar
 
 class CalendarViewController: UIViewController, UITableViewDataSource, UITableViewDelegate,FSCalendarDelegate,FSCalendarDataSource,FSCalendarDelegateAppearance{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return todoList.count
+        return today_todolist.count
     }
     
+    // cellforrowat セルの内容作って返す, 細かい処理はtableviewがやってくれる！返す値を渡すだけ
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath)
-        let myTodo = todoList[indexPath.row]
+        let myTodo = today_todolist[indexPath.row]
         cell.textLabel?.text = myTodo.todoTitle
         if myTodo.todoDone {
             cell.accessoryType = UITableViewCell.AccessoryType.checkmark
@@ -27,7 +28,6 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     var todoList = [MyTodo]()
-    var todo_notnil_list = [MyTodo]()
     var today_todolist = [MyTodo]()
 
     @IBOutlet weak var calendar: FSCalendar!
@@ -43,10 +43,15 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         // 年月日の一致
         // 日付を同じ形にしたら、if == でとってこれる
         
-        
+
+    }
+    
+    // CalendarViewControllerが描画される前に呼び出される
+    override func viewWillAppear(_ animated: Bool) {
+        todoList = []
+
+        // UserDefaultsから値取得する処理
         let userDefaults = UserDefaults.standard
-        
-        // UserDefaultsに保存された値を取得
         if let storedTodoList = userDefaults.object(forKey: "todoList") as? Data{
             do {
                 // シリアライズしてtodoListにappend
@@ -58,21 +63,9 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
                 // エラー処理なし
             }
         }
-    }
-    
-    // CalendarViewControllerが描画される前に呼び出される
-    override func viewWillAppear(_ animated: Bool) {
-        todo_notnil_list = [] // 毎回描画時に配列をリセット
         today_todolist = []
-        
-        for task in todoList{
-            if task.todoDate != nil{
-                todo_notnil_list.append(task)
-            }
-        }
-        print("todo_notnil_date :")
-        print(todo_notnil_list)
-        
+        print("today_todolist")
+        print(today_todolist)
         // 現在日時と合致しているタスクをtableviewに表示
         
         let dateFormatter = DateFormatter()
@@ -84,20 +77,24 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         let todayString = dateFormatter.string(from: Date())
         
         print("todayString :" + todayString)
-        
-        for todo_notnil in todo_notnil_list{
-            // 登録したタスクの日付がカレンダーの初期選択日（今日）と一致したら
-            if todayString.split(separator: " ")[0] == todo_notnil.todoDate!.split(separator: " ")[0]{
-                // tableviewに対象のtodo読み込み
-                today_todolist.append(todo_notnil)
+        // todoListから今日の日付一致したものを検索
+        for todo in todoList{
+            if let _ =  todo.todoDate{
+                print(todo.todoTitle!)
+                print(todo.todoDate!.split(separator: " ")[0])
+                // todoListの日付がカレンダーの初期選択日（今日）と一致したら
+                if todayString.split(separator: " ")[0] == todo.todoDate!.split(separator: " ")[0]{
+                    // today_todolistにtodo追加
+                    today_todolist.append(todo)
+                }
             }
-        }
-        // かくににょう
-        for todolist in today_todolist{
-            print(todolist.todoDone)
+
         }
         print("task icchi kazu")
         print(today_todolist.count)
+        self.calendar_tableView.reloadData()
+//        self.calendar_tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: UITableView.RowAnimation.right)
+        
     }
     
     func getDay(_ date:Date) -> (Int,Int,Int){

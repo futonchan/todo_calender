@@ -10,11 +10,14 @@ import UIKit
 class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // 要求があったとき、todoListの行数返す
+    // アローは関数、func 関数名(引数) -> 返り値{ 処理 }
+    // TableView使うのに必須の関数１
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todoList.count
     }
     
     // 要求があったとき、todoListの行ごとの内容を返す
+    // TableView使うのに必須の関数２
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath)
         let myTodo = todoList[indexPath.row]
@@ -28,42 +31,42 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return cell
     }
     
-    // タスクをタップ時
+    // tableViewの項目をタップした時
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-//        let myTodo = todoList[indexPath.row]
-//        if myTodo.todoDone{
-//            myTodo.todoDone = false
-//        }
-//        else {
-//            myTodo.todoDone = true
-//        }
-//todoList[indexPath.row].todoTitle!
-        
         let alertController = UIAlertController(title: "タスク編集", message: "タスクを編集できます.                                          　--" , preferredStyle: UIAlertController.Style.alert)
         
         // datapickerの時間の初期値が現在の時間になってしまうのを修正
-        // datepicker設置
+        // datepicker設定
         let myDatePicker: UIDatePicker = UIDatePicker()
         myDatePicker.frame = CGRect(x: 15, y: 60, width: 280, height: 30)
         myDatePicker.preferredDatePickerStyle = .compact
         myDatePicker.timeZone = NSTimeZone.local
         myDatePicker.locale = Locale(identifier: "ja_JP")
-//        myDatePicker.datePickerMode = .date // 日付のみ
-        alertController.view.addSubview(myDatePicker)
-        
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .short
         dateFormatter.locale = Locale(identifier: "ja_JP")
-        
-        // 入力した日付をdateformat型に
-        // dataformat型は yyyy/mm/dd hh:mm
+
+        // タスク編集初期状態のdatepickerの時間を保存
         let init_picker_dateformat = dateFormatter.string(from:myDatePicker.date)
+        print("init picker date")
+        print(init_picker_dateformat)
+        print(todoList[indexPath.row].todoDate ?? "nil dayo")
 
-
+        if let tododate = todoList[indexPath.row].todoDate {
+            myDatePicker.date = dateFormatter.date(from: tododate)!
+        }
+        
+        // alertに設定したdatepickerを設置, date自体はUTCで、使用時にlocale読んで変換する
+        alertController.view.addSubview(myDatePicker)
+        
+        // self.todolist??
+        // クロージャ,関数？
+        // 宣言 :     関数名 = { (引数) -> 返り値の型 in 処理}
+        // 呼び出し:   関数名()
         alertController.addTextField{ (textField) -> Void in
-            textField.text = self.todoList[indexPath.row].todoTitle!
+            textField.text = self.todoList[indexPath.row].todoTitle! // 強制アンラップ
         }
         let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default){ (action: UIAlertAction) in
             if let textField = alertController.textFields?.first {
@@ -72,7 +75,9 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 let myTodo = MyTodo()
                 myTodo.todoTitle = textField.text!
                 
-                // もしタスクの日付を設定した場合、todoDateに格納
+                // ok押した時のdatepickerの時間と、初期時間を比較
+                print("okoshitatoki")
+                print(dateFormatter.string(from: myDatePicker.date))
                 if init_picker_dateformat != dateFormatter.string(from: myDatePicker.date){
                     myTodo.todoDate = dateFormatter.string(from: myDatePicker.date)
                 }
@@ -80,7 +85,7 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     myTodo.todoDate = nil
                 }
 
-                
+                // ？？ todoList入れてもtableViewには関係ないのでここで更新する意味？
                 self.todoList[indexPath.row] = myTodo
                 self.tableView.reloadData()
                 
@@ -156,6 +161,24 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+    // ビューが閉じられる寸前に実行される
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("viewdiddisapper")
+        // UserDefaultにtodolist項目を格納したい
+        let userDefaults = UserDefaults.standard
+        
+        do {
+            let data = try NSKeyedArchiver.archivedData(withRootObject: self.todoList, requiringSecureCoding: true)
+            print("saved to userdefault to:")
+            print(self.todoList.count)
+            userDefaults.set(data, forKey: "todoList")
+            userDefaults.synchronize()
+        }
+        catch {
+            // エラー処理なし
+        }
+    }
     
     @IBAction func tapAddButton(_ sender: Any) {
         let alertController = UIAlertController(title: "タスク追加", message: "タスクを入力してください", preferredStyle: UIAlertController.Style.alert)
@@ -202,6 +225,7 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
 }
 
 // オブジェクトとstandard
+// NSObject, NSSecureCoding継承
 class MyTodo: NSObject, NSSecureCoding {
     static var supportsSecureCoding: Bool{
         return true
@@ -215,13 +239,16 @@ class MyTodo: NSObject, NSSecureCoding {
     override init(){
     }
     
+    //　required init...init関数を強制オーバーライド
     required init?(coder aDecoder: NSCoder) {
+        // UserDefault -> Stringに変換
         todoTitle = aDecoder.decodeObject(forKey: "todoTitle") as? String
         todoDone = aDecoder.decodeBool(forKey: "todoDone")
         todoDate = aDecoder.decodeObject(forKey: "todoDate") as? String
     }
     
     func encode(with aCoder: NSCoder) {
+        // String -> UserDefaultに変換
         aCoder.encode(todoTitle, forKey: "todoTitle")
         aCoder.encode(todoDone, forKey: "todoDone")
         aCoder.encode(todoDate, forKey: "todoDate")
