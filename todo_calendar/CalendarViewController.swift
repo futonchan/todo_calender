@@ -27,28 +27,24 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
     
-    var todoList = [MyTodo]()
-    var today_todolist = [MyTodo]()
+    var todoList = [MyTodo]() // UserDefaultsからとってくる全体のTodolist
+    var today_todolist = [MyTodo]() // Calendar画面で描画されるtodoList
 
     @IBOutlet weak var calendar: FSCalendar!
     @IBOutlet weak var calendar_tableView: UITableView!
+    
+    // 初回の一回のみ実行
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // デリゲートの設定?
         self.calendar.dataSource = self
         self.calendar.delegate = self
-        
-        //日付どんな感じになってる？
-        // 年月日の一致
-        // 日付を同じ形にしたら、if == でとってこれる
-        
-
     }
     
-    // CalendarViewControllerが描画される前に呼び出される
+    // CalendarViewControllerが描画される前に毎回呼び出される（画面遷移したときなど）
     override func viewWillAppear(_ animated: Bool) {
-        todoList = []
+        todoList = [] // UserDefaultsからとってきたtodoList全体を格納する
 
         // UserDefaultsから値取得する処理
         let userDefaults = UserDefaults.standard
@@ -93,19 +89,37 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         print("task icchi kazu")
         print(today_todolist.count)
         self.calendar_tableView.reloadData()
-//        self.calendar_tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: UITableView.RowAnimation.right)
         
     }
     
-    func getDay(_ date:Date) -> (Int,Int,Int){
+    func getDay(_ date:Date) -> String{
         let tmpCalendar = Calendar(identifier: .gregorian)
         let year = tmpCalendar.component(.year, from: date)
         let month = tmpCalendar.component(.month, from: date)
         let day = tmpCalendar.component(.day, from: date)
-        return (year,month,day)
+        return String(year) + "/" + String(month) + "/" + String(day)
     }
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition){
-        let selectDay = getDay(date)
+//        let selectDay = getDay(date)
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .short
+        dateFormatter.locale = Locale(identifier: "ja_JP")
+        let selectDay = dateFormatter.string(from: date).split(separator: " ")[0]
+        
+        today_todolist = []
+        // todoListから今日の日付一致したものを検索
+        for todo in todoList{
+            if let _ =  todo.todoDate{
+                // todoListの日付がカレンダーの初期選択日（今日）と一致したら
+                if selectDay == todo.todoDate!.split(separator: " ")[0]{
+                    // today_todolistにtodo追加
+                    today_todolist.append(todo)
+                }
+            }
+        }
+        
+        self.calendar_tableView.reloadData()
     }
 }

@@ -54,6 +54,7 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         print(init_picker_dateformat)
         print(todoList[indexPath.row].todoDate ?? "nil dayo")
 
+        // もし前回、タスクの時間を設定していたら、その時間をUIDatePickerの初期設定時間とする
         if let tododate = todoList[indexPath.row].todoDate {
             myDatePicker.date = dateFormatter.date(from: tododate)!
         }
@@ -76,7 +77,6 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 myTodo.todoTitle = textField.text!
                 
                 // ok押した時のdatepickerの時間と、初期時間を比較
-                print("okoshitatoki")
                 print(dateFormatter.string(from: myDatePicker.date))
                 if init_picker_dateformat != dateFormatter.string(from: myDatePicker.date){
                     myTodo.todoDate = dateFormatter.string(from: myDatePicker.date)
