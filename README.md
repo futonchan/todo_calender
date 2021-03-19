@@ -32,6 +32,7 @@
 - Date比較は、Stringで比較しないほうがいい
 - DateFormatterは何もしないと標準で、.locale決めてから、dataformatterがcallされてはじめて+09:00されて日本の時間になる
 - とりあえず初手Apple Developer Document読む
+- cocoapod = pipみたいなパッケージ管理、podfileに入れたいもの書いて、pod installでインストールされる
 
 # わからないこと
 - CalendarViewのTableViewがどこからデータを撮ってきているのか  
