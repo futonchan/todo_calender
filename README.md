@@ -34,7 +34,8 @@
 - DateFormatterは何もしないと標準で、.locale決めてから、dataformatterがcallされてはじめて+09:00されて日本の時間になる
 - とりあえず初手Apple Developer Document読む
 - cocoapod = pipみたいなパッケージ管理、podfileに入れたいもの書いて、pod installでインストールされる
-
+- UserDefault,iOSのアップデートでデータ消える？
+ 
 # わからないこと
 - CalendarViewのTableViewがどこからデータを撮ってきているのか  
 予想：必須メソッドの「numberOfRowsInSection」と「cellForRowAt」。更新（self.tableview.reload, self.tableview.insertrowsも？）を行うことで、必須メソッドが実行されてtableViewにデータが反映される。
