@@ -18,6 +18,7 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath)
         let myTodo = today_todolist[indexPath.row]
         cell.textLabel?.text = myTodo.todoTitle
+        cell.detailTextLabel?.text = myTodo.todoDate
         if myTodo.todoDone {
             cell.accessoryType = UITableViewCell.AccessoryType.checkmark
         }

@@ -22,6 +22,7 @@ class TodoViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath)
         let myTodo = todoList[indexPath.row]
         cell.textLabel?.text = myTodo.todoTitle
+        cell.detailTextLabel?.text = myTodo.todoDate
         if myTodo.todoDone {
             cell.accessoryType = UITableViewCell.AccessoryType.checkmark
         }
