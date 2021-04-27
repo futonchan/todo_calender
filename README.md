@@ -53,7 +53,7 @@ self.〜は、class内の変数を使えるもの。tableViewはドラッグし�
 - Control + ドラッグでビューを関連づける意味は？何がしたくてやっている？
 - ↑の関連づけの際にDelegateもチェック入れるように言われるけどどこで使っているかがわからない
 - 構文が長い、メソッドが長い
-- nilがわからない、エラー出たら適当に押して?とか!とかを入れてもらってる  
+
 メモった、C言語の間接参照みたいに、Optional変数宣言のときの「？」と、それ以外の「？」は別物。  
 神解説 :https://qiita.com/maiki055/items/b24378a3707bd35a31a8
 - 
@@ -62,3 +62,4 @@ self.〜は、class内の変数を使えるもの。tableViewはドラッグし�
 - https://qiita.com/Koutya/items/f5c7c12ab1458b6addcd
 - https://qiita.com/maiki055/items/b24378a3707bd35a31a8
 - https://developer.apple.com/documentation/uikit/uidatepicker
+- https://qiita.com/ytakzk/items/d7bb8182d43cdfc9b580#comment-99f594634ebe7d219b11
