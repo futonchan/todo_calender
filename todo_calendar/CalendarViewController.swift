@@ -64,8 +64,8 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
         today_todolist = []
-        print("today_todolist")
-        print(today_todolist)
+//        print("today_todolist")
+//        print(today_todolist)
         // 現在日時と合致しているタスクをtableviewに表示
         
         let dateFormatter = DateFormatter()
@@ -76,12 +76,12 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
         // 現在日時をDateformatterに合わせて変形
         let todayString = dateFormatter.string(from: Date())
         
-        print("todayString :" + todayString)
+//        print("todayString :" + todayString)
         // todoListから今日の日付一致したものを検索
         for todo in todoList{
             if let _ =  todo.todoDate{
-                print(todo.todoTitle!)
-                print(todo.todoDate!.split(separator: " ")[0])
+//                print(todo.todoTitle!)
+//                print(todo.todoDate!.split(separator: " ")[0])
                 datesWithEvent.append(String(todo.todoDate!.split(separator: " ")[0]))
                 // todoListの日付がカレンダーの初期選択日（今日）と一致したら
                 if todayString.split(separator: " ")[0] == todo.todoDate!.split(separator: " ")[0]{
@@ -91,8 +91,8 @@ class CalendarViewController: UIViewController, UITableViewDataSource, UITableVi
             }
 
         }
-        print("task icchi kazu")
-        print(today_todolist.count)
+//        print("task icchi kazu")
+//        print(today_todolist.count)
         self.calendar_tableView.reloadData()
         
         
